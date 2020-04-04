@@ -1,0 +1,926 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"ro",
+				"routineKey"
+			],
+			[
+				"focus",
+				"focusLastInput"
+			],
+			[
+				"items",
+				"itemsToAdd"
+			],
+			[
+				"compo",
+				"Component"
+			],
+			[
+				"inse",
+				"inserted"
+			],
+			[
+				"upda",
+				"updateItem"
+			],
+			[
+				"ite",
+				"itemRenderer"
+			],
+			[
+				"Local",
+				"LocalStore"
+			],
+			[
+				"Exc",
+				"Exercises"
+			],
+			[
+				"navig",
+				"navigationStack"
+			],
+			[
+				"dele",
+				"deleteHandler"
+			],
+			[
+				"Exerci",
+				"ExerciseList"
+			],
+			[
+				"newe",
+				"newExercise"
+			],
+			[
+				"selected",
+				"selectedRow"
+			],
+			[
+				"pend",
+				"pendingOperations"
+			],
+			[
+				"selec",
+				"selectedRowHash"
+			],
+			[
+				"field",
+				"fieldsToUpdate"
+			],
+			[
+				"class",
+				"classTypeExternalId"
+			],
+			[
+				"selc",
+				"selectedRowHash"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "src/Lib/Store.js",
+			"settings":
+			{
+				"buffer_size": 4247,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "import React from 'react';\nimport EditableList from '../Lib/EditableList';\nimport store from '../Lib/Store';\nimport { Link } from 'react-router-dom';\n\nexport default class extends React.Component {\n\troutineKey = this.props.match.params.key;\n\n\trender() {\n\t\treturn (\n\t\t\t<EditableList\n\t\t\t\titemGetter={() => store.routineExercises.byRoutine(this.routineKey)}\n\t\t\t\titemFactory={() => store.routineExercises.makeNew(this.routineKey)}\n\t\t\t\titemComponent={Item}\n\t\t\t/>);\n\t\treturn <h1>heya {this.routineKey}</h1>\n\t}\n}\n\nclass Item extends EditableList.Item {\n\trender() {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<Link to=\"\" className=\"btn btn-outline-secondary btn-fa-text\">\n\t\t\t\t\t<i className=\"fa fa-crosshairs\" />\n\t\t\t\t\t{this.context('choose')}\n\t\t\t\t</Link>\n\t\t\t</div>\n\t\t);\n\t}\n}",
+			"file": "src/Pages/RoutineConfig.jsx",
+			"file_size": 770,
+			"file_write_time": 132300759393895312,
+			"settings":
+			{
+				"buffer_size": 746,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/pietr/Desktop/note.todo",
+			"settings":
+			{
+				"buffer_size": 24819,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/App.css",
+			"settings":
+			{
+				"buffer_size": 1287,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/Translations.js",
+			"settings":
+			{
+				"buffer_size": 827,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"upper",
+				"Convert Case: Upper Case"
+			],
+			[
+				"comme",
+				"Toggle Comment"
+			],
+			[
+				"rename",
+				"Rename File"
+			],
+			[
+				"co",
+				"Toggle Comment"
+			],
+			[
+				"comm",
+				"Toggle Comment"
+			],
+			[
+				"jso",
+				"JSON Reindent: reindent file or selection"
+			],
+			[
+				"json",
+				"JSON Reindent: reindent file or selection"
+			],
+			[
+				"tabs",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"renam",
+				"Rename File"
+			],
+			[
+				"jsx",
+				"Set Syntax: JSX"
+			],
+			[
+				"folding",
+				"Code Folding: Fold Tag Attributes"
+			],
+			[
+				"fold",
+				"Code Folding: Fold Tag Attributes"
+			],
+			[
+				"js",
+				"Set Syntax: JSX"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"base",
+				"StringEncode: Base64 Decode"
+			],
+			[
+				"javas",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"wrap",
+				"Word Wrap: Toggle"
+			],
+			[
+				"jsoo",
+				"JSON Reindent: reindent file or selection"
+			],
+			[
+				"uppe",
+				"Convert Case: Upper Case"
+			],
+			[
+				"base6",
+				"StringEncode: Base64 Decode"
+			],
+			[
+				"base64",
+				"StringEncode: Base64 Decode"
+			],
+			[
+				"xml",
+				"Indent XML"
+			],
+			[
+				"indent",
+				"Auto indent"
+			],
+			[
+				"html",
+				"Set Syntax: HTML"
+			],
+			[
+				"razor",
+				"Set Syntax: Razor"
+			],
+			[
+				"sort",
+				"Sort Lines"
+			],
+			[
+				"hex",
+				"StringEncode: Unicode to Hexadecimal"
+			],
+			[
+				"uniq",
+				"Permute Lines: Unique"
+			],
+			[
+				"decode",
+				"URL Decode"
+			],
+			[
+				"url",
+				"URL Encode"
+			],
+			[
+				"http",
+				"HTML: Encode Special Characters"
+			],
+			[
+				"package",
+				"Package Control: Disable Package"
+			],
+			[
+				"javasc",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"renae",
+				"Rename File"
+			],
+			[
+				"c#",
+				"Set Syntax: C#"
+			],
+			[
+				"jo",
+				"Set Syntax: JSON"
+			],
+			[
+				"url deco",
+				"URL Decode"
+			],
+			[
+				"url de",
+				"URL Decode"
+			],
+			[
+				"jsn",
+				"JSON Reindent: reindent file or selection"
+			],
+			[
+				"lowe",
+				"Convert Case: Lower Case"
+			],
+			[
+				"lower",
+				"Convert Case: Lower Case"
+			],
+			[
+				"BASE",
+				"StringEncode: Base64 Decode"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"wra",
+				"Word Wrap: Toggle"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/Git/gym-khana",
+		"/C/Git/gym-khana/src",
+		"/C/Git/gym-khana/src/Pages"
+	],
+	"file_history":
+	[
+		"/C/Git/gym-khana/src/Lib/EditableList.jsx",
+		"/C/Git/gym-khana/src/Pages/Routines.jsx",
+		"/C/Git/gym-khana/src/Pages/Exercises.jsx",
+		"/C/Git/gym-khana/src/App.jsx",
+		"/C/Git/gym-khana/src/Lib/Store.js",
+		"/C/Git/gym-khana/node_modules/prop-types/checkPropTypes.js",
+		"/C/Git/gym-khana/src/Pages/Index.jsx",
+		"/C/Git/gym-khana/gk.sublime-project",
+		"/C/Git/gym-khana/src/index.js",
+		"/C/Git/gym-khana/src/setupTests.js",
+		"/C/Users/pietr/Desktop/note.todo",
+		"/C/pubblicata/DocsMarshalPortal/manifest.json",
+		"/C/pubblicata/DocsMarshalPortal/packages.config",
+		"/C/pubblicata/DocsMarshalPortal/libman.json",
+		"/C/Users/pietr/Desktop/release.base.html",
+		"/C/Git/gym-khana/src/Translations.js",
+		"/C/Git/gym-khana/src/App.css",
+		"/C/Git/gym-khana/public/index.html",
+		"/C/Git/gym-khana/src/Pages/MyPrograms.jsx",
+		"/C/Git/gym-khana/src/Lib/StackNav.jsx",
+		"/C/Git/gym-khana/package.json",
+		"/C/Git/gym-khana/node_modules/bootstrap/dist/css/bootstrap.css",
+		"/C/Git/gym-khana/src/App.js",
+		"/C/Git/gym-khana/src/Pages/MyPrograms.txt",
+		"/C/Git/gym-khana/src/App.test.js",
+		"/C/Git/gym-khana/src/index.css",
+		"/C/Git/gym-khana/src/serviceWorker.js",
+		"/C/Git/react-redux-boilerplate/node_modules/to-fast-properties/index.js",
+		"/C/Git/react-redux-boilerplate/node_modules/symbol-observable/lib/ponyfill.js",
+		"/C/Git/react-redux-boilerplate/node_modules/symbol-observable/lib/index.js",
+		"/C/Git/react-redux-boilerplate/node_modules/symbol-observable/index.js",
+		"/C/Git/react-redux-boilerplate/node_modules/is-observable/index.js",
+		"/C/Git/react-redux-boilerplate/node_modules/isobject/index.js",
+		"/C/Git/react-redux-boilerplate/node_modules/is-obj/index.js",
+		"/C/Git/react-redux-boilerplate/app/app.js",
+		"/C/Git/react-redux-boilerplate/app/reducers.js",
+		"/C/Git/react-redux-boilerplate/app/init.js",
+		"/C/Git/react-redux-boilerplate/babel.config.js",
+		"/C/Git/react-redux-boilerplate/jest.config.js",
+		"/C/Users/pietr/.gitconfig",
+		"/C/Drivers/TouchpadDriver/Synaptics_19.5.10.149/Source/ReleaseNotes.html",
+		"/C/Drivers/TouchpadDriver/PnpUtilResult.txt",
+		"/C/Projects/DocsMarshal/DocsMarshal.sln",
+		"/C/Users/pietr/OneDrive/Desktop/note.todo",
+		"/C/Users/pietr/OneDrive/Desktop/setup.txt",
+		"/C/Users/pietr/OneDrive/Desktop/DMClient.application",
+		"/C/Users/pietr/AppData/Local/Temp/Temp1_DOCSMarshal.zip/publish.htm",
+		"/C/Users/pietr/OneDrive/Desktop/release.base.html",
+		"/C/Projects/Baia Holiday/Web/BookingOnline2017/Content/css/macy.css",
+		"/C/Users/pietr/docsmarshal/Baia Holiday - booking 2020/scheda_struttura.html",
+		"/C/Users/pietr/docsmarshal/Baia Holiday - booking 2020/css/stile.css",
+		"/C/Projects/DocsMarshal/Web/DocsMarshalPortal/Scripts/localization/dx.messages.it.js",
+		"/C/Program Files (x86)/DevExpress 19.2/DevExtreme/Sources/Lib/js/localization/dx.messages.it.js",
+		"/C/Projects/DocsMarshal/Web/DocsMarshalPortal/Scripts/localization/dx.messages.ja.js",
+		"/C/Projects/DocsMarshal/Web/DocsMarshalPortal/Scripts/dx.all.debug.js",
+		"/C/Projects/DocsMarshal/Web/DocsMarshalPortal/Scripts/dx.all.js",
+		"/C/Program Files (x86)/DevExpress 19.2/DevExtreme/Sources/Lib/js/dx-gantt.js",
+		"//DOCSMARSHAL/Scambio/Pietro/release.base.html",
+		"//DOCSMARSHAL/Scambio/Pietro/release.html",
+		"//DOCSMARSHAL/Scambio/Pietro/KB DocsMarshal C#.cs",
+		"/C/Users/pietr/Downloads/T868822/T868822/T868822.csproj",
+		"/C/Users/pietr/AppData/Local/Temp/body-1.txt",
+		"/C/Users/pietr/AppData/Local/Temp/body.txt",
+		"/C/Users/pietr/OneDrive/Desktop/Omnicom.Workflow",
+		"//DOCSMARSHAL/Scambio/Pietro/sites.xml",
+		"/C/Projects/DocsMarshal/Workflow/DocsMarshal.Workflow.ActivityLibrary.DocsMarshalConfiguration/DocsMarshal.Workflow.ActivityLibrary.DocsMarshalConfiguration.csproj",
+		"/C/Users/pietr/OneDrive/Desktop/gil.json",
+		"/C/Users/pietr/OneDrive/Desktop/perotti.html",
+		"/C/Projects/Clienti/Cualeva/FirmaGrafometrica/bin/Release/FirmaGrafometrica.exe.config",
+		"/C/Users/pietr/OneDrive/Desktop/release.html",
+		"/C/Projects/DocsMarshal/Server/DocsMarshal.Profile.Service/bin/Debug/Configuration/d3288cee-4919-4063-ac08-b33eb9863c00/ProfileService",
+		"/C/Users/pietr/OneDrive/Desktop/PME.todo",
+		"/C/Users/pietr/OneDrive/Desktop/Vergnano.todo",
+		"/C/Users/pietr/OneDrive/Desktop/NEXI.todo",
+		"/C/Users/pietr/OneDrive/Desktop/ddd.html",
+		"/C/Users/pietr/OneDrive/Desktop/WorkflowService",
+		"/C/Users/pietr/Dropbox/03_USO_INTERNO/queryUtili.txt",
+		"/C/Users/pietr/AppData/Local/Microsoft/Windows/INetCache/Content.Outlook/5Q26ZH6B/Allegato1 (002).JSON",
+		"//DOCSMARSHAL/Scambio/Luca Podavini/Excel/Pdf_Get_Metadata.cs",
+		"//DOCSMARSHAL/Scambio/Luca Podavini/Excel/From_Excel_To_Pdf.cs",
+		"/C/Projects/Clienti/Univet/ImportFromFilesystem/bin/Release/ImportFromFilesystem.exe.config",
+		"/C/Users/pietr/Downloads/Microsoft.SkypeApp_kzf8qxf38zg5c!App/All/ExcelToPdf_Settings.cs",
+		"/C/Users/pietr/OneDrive/Desktop/ciao.cs",
+		"/C/Users/pietr/OneDrive/Desktop/FNVAC2019_esempio.DAT",
+		"/C/Users/pietr/OneDrive/Desktop/FNVAC20200217190005_20200217190005_TEST.DAT",
+		"/C/Users/pietr/OneDrive/Desktop/FNVAC20200217190005_20200217190005.DAT",
+		"/C/Users/pietr/OneDrive/Desktop/FNVAC20200117190004_20200117190005.DAT",
+		"/C/Users/pietr/AppData/Local/Microsoft/Windows/INetCache/Content.Outlook/5Q26ZH6B/FNVAC20200217190005_20200217190005.DAT",
+		"/C/Users/pietr/OneDrive/Desktop/FNVAO_DM_20200213_100130_9997838_20200213100509.DAT",
+		"/C/Users/pietr/OneDrive/Desktop/FNVAB20200123073004.DAT",
+		"/C/Users/pietr/OneDrive/Desktop/eded/FNVAC20200221093026_20200221093026.DAT",
+		"/C/Users/pietr/OneDrive/Desktop/eded/FNVAC20200218093026_20200218093028.DAT",
+		"/C/Users/pietr/OneDrive/Desktop/eded/FNVAC20200218150023_20200218150023.DAT",
+		"/C/Users/pietr/OneDrive/Desktop/eded/FNVAC20200218190006_20200218190006.DAT",
+		"/C/Users/pietr/OneDrive/Desktop/eded/FNVAC20200219093031_20200219093032.DAT",
+		"/C/Users/pietr/OneDrive/Desktop/eded/FNVAC20200219110006_20200219110010.DAT",
+		"/C/Users/pietr/OneDrive/Desktop/eded/FNVAC20200219150011_20200219150012.DAT",
+		"/C/Users/pietr/OneDrive/Desktop/eded/FNVAC20200219190005_20200219190005.DAT",
+		"/C/Users/pietr/OneDrive/Desktop/eded/FNVAC20200220093026_20200220093027.DAT",
+		"/C/Users/pietr/OneDrive/Desktop/eded/FNVAC20200220150018_20200220150019.DAT",
+		"/C/Users/pietr/OneDrive/Desktop/eded/FNVAC20200220190005_20200220190006.DAT",
+		"/C/Users/pietr/OneDrive/Desktop/eded/FNVAP20200108083111_20200108083112.dat",
+		"/C/Users/pietr/OneDrive/Desktop/eded/FNVAP20200108103115_20200108103117.dat",
+		"/C/Users/pietr/OneDrive/Desktop/eded/FNVAP20200108193133_20200108193135.dat",
+		"/C/Users/pietr/OneDrive/Desktop/eded/FNVAP20200116083024_20200116083025.dat",
+		"/C/Users/pietr/OneDrive/Desktop/eded/FNVAP20200116093042_20200116093044.dat",
+		"/C/Users/pietr/OneDrive/Desktop/eded/FNVAP20200117073006_20200117073007.dat",
+		"/C/Users/pietr/OneDrive/Desktop/eded/FNVAP20200116203045_20200116203047.dat",
+		"/C/Users/pietr/OneDrive/Desktop/eded/FNVAP20200117123039_20200117123041.dat",
+		"/C/Users/pietr/OneDrive/Desktop/eded/FNVAP20200117143039_20200117143041.dat",
+		"/C/Users/pietr/OneDrive/Desktop/eded/FNVAP20200117193043_20200117193044.dat",
+		"/C/Users/pietr/OneDrive/Desktop/eded/FNVAP20200118073003_20200118073004.dat",
+		"/C/Users/pietr/OneDrive/Desktop/eded/FNVAP20200120103029_20200120103030.dat",
+		"/C/Users/pietr/OneDrive/Desktop/eded/FNVAP20200120143031_20200120143032.dat",
+		"/C/Users/pietr/OneDrive/Desktop/eded/FNVAP20200120183032_20200120183032.dat",
+		"/C/Users/pietr/OneDrive/Desktop/eded/FNVAP20200121073004_20200121073005.dat",
+		"/C/Users/pietr/OneDrive/Desktop/eded/FNVAP20200128173055_20200128173056.dat",
+		"/C/Users/pietr/OneDrive/Desktop/eded/FNVAP20200128183055_20200128183056.dat",
+		"/C/Users/pietr/OneDrive/Desktop/eded/FNVAP20200129103044_20200129103045.dat",
+		"/C/Users/pietr/OneDrive/Desktop/eded/FNVAP20200129083028_20200129083030.dat",
+		"/C/Users/pietr/OneDrive/Desktop/eded/FNVAP20200129113045_20200129113046.dat",
+		"/C/Users/pietr/OneDrive/Desktop/eded/FNVAP20200129193049_20200129193059.dat",
+		"/C/Users/pietr/OneDrive/Desktop/eded/FNVAP20200130073005_20200130073005.dat",
+		"/C/Users/pietr/OneDrive/Desktop/eded/FNVAP20200206123107_20200206123108.dat",
+		"/C/Users/pietr/OneDrive/Desktop/eded/FNVAP20200206143107_20200206143108.dat",
+		"/C/Users/pietr/OneDrive/Desktop/eded/FNVAP20200206173108_20200206173109.dat",
+		"/C/Users/pietr/OneDrive/Desktop/eded/FNVAP20200207143117_20200207143126.dat",
+		"/C/Users/pietr/OneDrive/Desktop/eded/FNVAP20200207153117_20200207153119.dat"
+	],
+	"find":
+	{
+		"height": 24.0
+	},
+	"find_in_files":
+	{
+		"height": 115.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"getter",
+			"Store",
+			"store.",
+			"prop",
+			"shape",
+			"routine",
+			"case",
+			"{",
+			"case",
+			"my-ro",
+			", ",
+			"required",
+			"exercise",
+			"list",
+			"this.props.itemRenderer",
+			"cbremo",
+			"dbremove",
+			"throw",
+			"cbupd",
+			"updateItemInternal",
+			"updateItem",
+			"state.",
+			"this.getter",
+			"this.store",
+			"cbChanged",
+			"-list",
+			"buttons",
+			"isvalid",
+			"programs",
+			"titleMyPrograms",
+			"MyPrograms",
+			"add",
+			"focus",
+			"add",
+			"20px",
+			"    ",
+			"\"name\"",
+			"name",
+			"self",
+			"newex",
+			"nextk",
+			"key",
+			"chan",
+			"oncha",
+			"save",
+			"save(",
+			"excer",
+			"this.key",
+			"props.ex",
+			"exercises",
+			"key",
+			"gx",
+			"focusLastInput",
+			"newe",
+			".log",
+			".targe",
+			"removeHandler",
+			"data",
+			"this.",
+			"TranslationsContext",
+			"prev",
+			"pop",
+			"class=",
+			"state",
+			"Translations",
+			"setLanguage",
+			"getLanguage",
+			"deleteHandler",
+			"app",
+			"Exercises",
+			"li",
+			"this.state.",
+			"handler",
+			"this.data.add",
+			"id",
+			"this.props.d",
+			"Esercizio",
+			"sessionid",
+			"settings.",
+			"promise",
+			"inocert",
+			"CommercialSi",
+			"commercialsi",
+			"GetBoolParameter",
+			"\"Model.",
+			"docsmar",
+			"2020.1",
+			"2002.1",
+			"domain",
+			"Ricalcola('@Url.Action(\"GetTotalAmountWCheckAvailability\", \"DocsMarshal\")', '@Model.CurStruttura.ObjectId', '@tipol.RefIdSettore', '@Model.Filter.DalDt.Value.ToString(\"yyyyMMdd\")', '@Model.Filter.AlDt.Value.ToString(\"yyyyMMdd\")', ' @Model.Filter.Adulti', '@Model.Filter.Juniores', '@Model.Filter.Baby', '@prodotto.ObjectId.ToString()', '',             '@trattamento.Codice', '', '', '@String.Format(\"P{0}T{1}\", prodotto.ObjectId.ToString(\"N\"), trattamento.Codice)',       '@prodotto.ObjectId.ToString(\"N\")', @calcola, false);",
+			"'",
+			", ",
+			"C406",
+			"visibleIndex",
+			"filterValues",
+			"rules",
+			"allowEditing",
+			"encodeHtml",
+			"\"format\"",
+			"\"validationRules\": []",
+			"formItem",
+			"editorOptions",
+			"edito",
+			"editorO",
+			"editoro",
+			"editorop",
+			"editorOptions",
+			"fixed",
+			"externalId",
+			"sortOrder",
+			"sortIndex",
+			"autoExpandGroup",
+			"groupIndex",
+			"caption",
+			"_stringSize",
+			"_scale",
+			"_precision",
+			"_fieldType",
+			"_allowEditing",
+			"_allowNull",
+			"required",
+			"custom",
+			"custo",
+			"validationu",
+			"funti",
+			"addOpe",
+			"console",
+			"reject"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "src/Lib/Store.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4247,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3348,
+								3348
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1860.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/Pages/RoutineConfig.jsx",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 746,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								644,
+								644
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JSX/JSX.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/C/Users/pietr/Desktop/note.todo",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 24819,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"plain_tasks_remain_time_phantoms":
+							[
+							],
+							"syntax": "Packages/PlainTasks/PlainTasks.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "src/App.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1287,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								499,
+								499
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 45.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "src/Translations.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 827,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								281,
+								281
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 24.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "gk.sublime-project",
+	"replace":
+	{
+		"height": 44.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"routi",
+				"src\\Pages\\Routines.jsx"
+			],
+			[
+				"exerci",
+				"src\\Pages\\Exercises.jsx"
+			],
+			[
+				"edit",
+				"src\\Lib\\EditableList.jsx"
+			],
+			[
+				"store",
+				"src\\Lib\\Store.js"
+			],
+			[
+				"edita",
+				"src\\Lib\\EditableList.jsx"
+			],
+			[
+				"edi",
+				"src\\Lib\\EditableList.jsx"
+			],
+			[
+				"routineco",
+				"src\\Pages\\RoutineConfig.jsx"
+			],
+			[
+				"jsx",
+				"src\\Pages\\Index.jsx"
+			],
+			[
+				"app.js",
+				"src\\App.jsx"
+			],
+			[
+				"index",
+				"src\\Pages\\Index.jsx"
+			],
+			[
+				"trans",
+				"src\\Translations.js"
+			],
+			[
+				"css",
+				"src\\App.css"
+			],
+			[
+				"routine",
+				"src\\Pages\\Routines.jsx"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 237.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

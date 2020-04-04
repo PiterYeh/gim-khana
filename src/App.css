@@ -1,38 +1,82 @@
-.App {
+/* app layout */
+html, body {
+  height: 100%;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+}
+#app > nav {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  align-items: center;
+}
+#app > nav > .nav-title {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* utility */
+.btn-fa-text .fa {
+  margin-right: 5px;
+}
+.btn-fa-text-before .fa {
+  margin-right: unset;
+  margin-left: 5px;
+}
+.gk-btn-bottom {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  text-align: center;
+}
+.gk-btn-group > .btn:not(:first-child) {
+  margin-left: 1em;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* editable list */
+.editable-list-content > * {
+  padding-top: 20px;
+  padding-bottom: 10px;
+  margin-top: 0px;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+.editable-list-content > *:first-child {
+  padding-top: 5px;
+  border-top: none;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* gk-fix */
+.gk-fix {
   display: flex;
+}
+.gk-fix-column {
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  height: 100%;
+}
+.gk-fix-row {
+  flex-direction: row;
+}
+.gk-fix > .gk-fix-fixed {
+  flex: 0 1 0;
+}
+.gk-fix > .gk-fix-content {
+  flex: 1 0 0;
+}
+.gk-fix-column > .gk-fix-content {
+  overflow-y: auto;
+}
+.gk-fix-row > .gk-fix-content {
+  overflow-x: auto;
 }
 
-.App-link {
-  color: #61dafb;
+/* exercises page */
+.exercise {
+  padding-top: 20px;
+  padding-bottom: 10px;
+  margin-top: 0px;
+  margin-left: 8px;
+  margin-right: 8px;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.exercise:first-child {
+  padding-top: 5px;
+  border-top: none;
 }
