@@ -1,6 +1,5 @@
 import React from 'react';
 import store from '../Lib/Store';
-import { context } from '../Translations';
 import EditableList from '../Lib/EditableList';
 import { Link } from "react-router-dom";
 

@@ -29,45 +29,67 @@ export default class EditableList extends React.Component {
 		});
 	}
 
+	raiseChanged(list) {
+		if(typeof this.props.onChange === 'function')
+			this.props.onChange.apply(null, arguments);
+	}
+
 	async add() {
-		var obj = await this.itemFactory(this.props.store);
+		this.setState();
+		var obj = await this.itemFactory(this.props.store, this.state.items);
+		if(obj == null)
+			return;
 		this.itemsToAdd.push(obj.key);
 		this.focusLastInput = true;
-		this.setState(state => ({
-			items: state.items.concat(obj)
-		}));
+		this.setState(state => {
+			var items = state.items.concat(obj);
+			this.raiseChanged(items, 'added', { index: items.length - 1 });
+			return { items };
+		});
 	}
 
 	async remove(key) {
-		await this.props.store.remove(key);
-		this.setState(state => ({
-			items: state.items.filter(x => x.key != key)
-		}));
+		var i = this.itemsToAdd.indexOf(key);
+		if(i !== -1)
+			this.itemsToAdd.splice(i, 1);
+		else
+			await this.props.store.remove(key);
+		this.setState(state => {
+			var oldItem = state.items.filter(x => x.key === key);
+			var items = state.items.filter(x => x.key !== key);
+			if(oldItem != null)
+				this.raiseChanged(items, 'removed', { oldItem: oldItem });
+			return { items };
+		});
 	}
 
 	async update(item) {
 		if(!this.props.store.isValid(item))
 			return;
 		var iToAdd = this.itemsToAdd.indexOf(item.key);
-		if(iToAdd != -1) {
+		if(iToAdd !== -1) {
 			// insert
 			var inserted = await this.props.store.insert(item);
 			this.itemsToAdd.splice(iToAdd, 1);
-			this._updateItem(item, inserted);
+			this._updateItem(item, inserted, 'inserted');
 		}
 		else {
 			// update
 			var updated = await this.props.store.update(item);
-			this._updateItem(item, updated);
+			this._updateItem(item, updated, 'updated');
 		}
 	}
 
-	_updateItem(oldItem, newItem) {
+	_updateItem(oldItem, newItem, type) {
 		this.setState(state => {
 			var items = [...state.items];
 			for(var i = 0; i < items.length; ++i)
 				if(items[i].key === oldItem.key) {
+					var old = items[i];
+					if('_bag' in oldItem)
+						newItem._bag = oldItem._bag;
 					items[i] = newItem;
+					this.raiseChanged(items, type, { index: i, oldItem: old });
 					return { items };
 				}
 			throw new Error('item not found');
@@ -78,7 +100,7 @@ export default class EditableList extends React.Component {
 		if(this.focusLastInput) {
 			this.focusLastInput = false;
 			var elements = this.ref.current.querySelectorAll('.gk-focus-after-create');
-			if(elements.length == 0)
+			if(elements.length === 0)
 				return;
 			var element = elements[elements.length-1];
 			element.focus();
@@ -91,11 +113,11 @@ export default class EditableList extends React.Component {
 		return (
 			<div className="{this.props.className} gk-fix gk-fix-column editable-list" ref={this.ref}>
 				<div className="gk-fix-content editable-list-content">
-					{this.state.items.map(item => {
+					{this.state.items.map((item, i) => {
 						if(renderer != null)
 							return renderer.call(null, item, this)
 						else if(Component != null)
-							return <Component key={item.key} item={item} cbRemove={this.remove.bind(this)} cbUpdate={this.update.bind(this)} />
+							return <Component key={item.key} index={i} item={item} cbRemove={this.remove.bind(this)} cbUpdate={this.update.bind(this)} />
 						else
 							throw new Error('itemRenderer and itemComponent are not defined');
 					})}
@@ -124,14 +146,19 @@ export default class EditableList extends React.Component {
 
 		onChange(e) {
 			var target = e.target;
+			if(target.name === null || target.name === '')
+				throw new Error('input name not set');
+			this.setProperty(target.name, target.value);
+		}
+
+		setProperty(propName, value) {
 			this.setState(state => {
-				state.item[target.name] = target.value;
+				state.item[propName] = value;
 				return state;
 			});
 		}
 
 		update(e) {
-			var target = e.target;
 			this.setState(state => {
 				this.props.cbUpdate(state.item);
 				return state;

@@ -12,7 +12,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
   withRouter
 } from "react-router-dom";
 
@@ -54,15 +53,14 @@ class NavWithoutRouter extends React.Component {
   }
 
   getConfig(path) {
-    var paths = NavWithoutRouter.paths;
     var tokens = path.split('/');
     for(let key in this.paths) {
       var tokensI = key.split('/');
-      if(tokens.length != tokensI.length)
+      if(tokens.length !== tokensI.length)
         continue;
       var match = true;
       for(let i = 0; i < tokens.length && match; ++i) {
-        if(tokensI[i][0] != ':' && tokens[i] != tokensI[i])
+        if(tokensI[i][0] !== ':' && tokens[i] !== tokensI[i])
           match = false;
       }
       if(match)

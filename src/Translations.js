@@ -10,6 +10,11 @@ const translations = {
 		titleMyRoutines: 'Schede',
 		exerciseTitle: 'Titolo',
 		exerciseSubtitle: 'Sottotitolo',
+		pickExercise: 'Scegli esercizio',
+		repTime: 'a tempo',
+		repCount: 'a ripetizioni',
+		repTimeUnit: 'secondi',
+		repCountUnit: 'ripetizioni',
 		go: 'Vai',
 		choose: 'Scegli'
 	},
@@ -22,6 +27,11 @@ const translations = {
 		titleMyRoutines: 'My Routines',
 		exerciseTitle: 'Title',
 		exerciseSubtitle: 'Subtitle',
+		pickExercise: 'Pick an exercise',
+		repTime: 'timed',
+		repCount: 'reps',
+		repTimeUnit: 'seconds',
+		repCountUnit: 'reps',
 		go: 'Go',
 		choose: 'Choose'
 	}

@@ -1,11 +1,6 @@
 import React from 'react';
 import { context } from '../Translations';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class PageIndex extends React.Component {
   static contextType = context;

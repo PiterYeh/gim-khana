@@ -1,7 +1,6 @@
 import React from 'react';
 import store from '../Lib/Store';
 import EditableList from '../Lib/EditableList';
-import { context as TranslationsContext } from '../Translations';
 
 export default () => <EditableList store={store.exercises} itemComponent={Exercise} />;
 

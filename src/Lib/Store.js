@@ -21,6 +21,15 @@ class Store {
 		};
 	}
 
+	clone(item) {
+		return JSON.parse(JSON.stringify(item));
+	}
+
+	removeBag(item) {
+		if(item != null && '_bag' in item)
+			delete item._bag;
+	}
+
 	/* validation utilities */
 	*validate(item) {}
 	isValid(item) {
@@ -75,6 +84,8 @@ class LocalStore extends Store {
 	async insert(item) {
 		if(item == null)
 			throw new Error('item is null');
+		item = this.clone(item);
+		this.removeBag(item);
 		this.assertValid(item);
 		var items = await this.fetch();
 		items.push(item);
@@ -83,6 +94,10 @@ class LocalStore extends Store {
 	}
 
 	async update(item) {
+		if(item == null)
+			throw new Error('item is null');
+		item = this.clone(item);
+		this.removeBag(item);
 		this.assertValid(item);
 		var items = await this.fetch();
 		for(var i = 0; i < items.length; ++i)
@@ -115,6 +130,11 @@ class LocalStore extends Store {
 }
 
 class ExerciseStore extends LocalStore {
+	constructor(store) {
+		super({ id: 'exercises' });
+		this.store = store;
+	}
+
 	async makeNew() {
 		var obj = await super.makeNew();
 		obj.title = '';
@@ -126,9 +146,21 @@ class ExerciseStore extends LocalStore {
 		if(this.isNullOrWhiteSpace(item.title))
 			yield 'title is required';
 	}
+
+	async remove(key) {
+		super.makeNew(key);
+		var related = this.store.routineExercises;
+		for(let item of related.byExercise(key))
+			await related.remove(item);
+	}
 }
 
 class RoutineStore extends LocalStore {
+	constructor(store) {
+		super({ id: 'routines' })
+		this.store = store;
+	}
+
 	async makeNew() {
 		var obj = await super.makeNew();
 		obj.title = '';
@@ -139,15 +171,29 @@ class RoutineStore extends LocalStore {
 		if(this.isNullOrWhiteSpace(item.title))
 			yield 'title is required';
 	}
+
+	async remove(key) {
+		super.makeNew(key);
+		var related = this.store.routineExercises;
+		for(let item of related.byRoutine(key))
+			await related.remove(item);
+	}
 }
 
 class RoutineExerciseStore extends LocalStore {
+	constructor(store) {
+		super({ id: 'routineExercises' })
+		this.store = store;
+	}
+
 	async makeNew(routineKey) {
 		if(routineKey == null || routineKey === undefined)
 			throw new Error('routineKey is null');
 		var obj = await super.makeNew();
 		obj.routineKey = routineKey;
-		obj.title = '';
+		obj.exerciseKey = null;
+		obj.index = null;
+		obj.reps = '';
 		return obj;
 	}
 
@@ -158,6 +204,10 @@ class RoutineExerciseStore extends LocalStore {
 			yield 'exerciseKey is null';
 		if(item.index == null)
 			yield 'index is null';
+		if(item.reps == null || item.reps === '')
+			yield 'reps is null';
+		if(item.reps <= 0)
+			yield 'invalid reps';
 	}
 
 	async byRoutine(routineKey) {
@@ -166,14 +216,19 @@ class RoutineExerciseStore extends LocalStore {
 		var items = await this.fetch();
 		return items.filter(x => x.routineKey === routineKey);
 	}
+
+	async byExercise(exerciseKey) {
+		if(exerciseKey == null || exerciseKey === undefined)
+			throw new Error('exerciseKey is null');
+		var items = await this.fetch();
+		return items.filter(x => x.exerciseKey === exerciseKey);
+	}
 }
 
 class GkStore {
-	constructor() {
-		this.exercises = new ExerciseStore({ id: 'exercises' });
-		this.routines = new RoutineStore({ id: 'routines' });
-		this.routineExercises = new RoutineExerciseStore({ id: 'routineExercises' });
-	}
+	exercises = new ExerciseStore(this);
+	routines = new RoutineStore(this);
+	routineExercises = new RoutineExerciseStore(this);
 }
 
 export default new GkStore();
