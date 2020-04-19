@@ -1,4 +1,20 @@
 class Store {
+	static fieldTypes = {
+		required: 1,
+		unique: 2,
+		autoIncrement: 4,
+		_reserved2: 8,
+		_reserved3: 16,
+		_reserved4: 32,
+		_reserved5: 64,
+		_reserved6: 128,
+		int: 256,
+		float: 512,
+		string: 1024,
+		date: 2048,
+		bool: 4096
+	};
+
 	constructor(options) {
 		this.key = options.key;
 		if(this.key == null)
@@ -45,6 +61,167 @@ class Store {
 		return value === null || value === undefined || value === '';
 	}
 }
+
+class IndexedDbStore extends Store {
+	constructor(options) {
+		super(options);
+		if(!window.indexedDB)
+			throw new Error('IndexedDB is not supported');
+
+		this.dbName = options.dbName;
+		if(this.dbName == null)
+			this.dbName = 'Store';
+		this.tableName = options.id;
+		if(this.tableName == null)
+			throw new Error('options.tableName is undefined');
+		this.fields = options.fields;
+		if(this.fields == null)
+			throw new Error('options.fields is undefined');
+		var keyField = this.fields[this.key];
+		if(keyField == null)
+			throw new Error(`key field "${this.key}" is not declared`);
+	}
+
+	// request to promise
+	r2p(request) {
+		return new Promise(function(resolve, reject) {
+			if('onerror' in request)
+				request.onerror = e => reject(e);
+			if('onsuccess' in request)
+				request.onsuccess = e => resolve(e.target.result);
+			if('oncomplete' in request)
+				request.oncomplete = e => resolve();
+		});
+	}
+
+	async exec(mode, f) {
+		await this.open();
+		var tran = this.db.transaction([this.tableName], mode);
+		var store = tran.objectStore(this.tableName);
+		var result = await f.call(this, store, tran);
+		await this.r2p(tran);
+		return result;
+	}
+
+	async unrollCursor(req) {
+		return new Promise(function(resolve,  reject) {
+			var result = [];
+			req.onsuccess = function(e) {
+				var cursor = e.target.result;
+				if(cursor) {
+					result.push(cursor.result);
+					cursor.continue();
+				}
+			}
+			return result;
+		})
+	}
+
+	async open() {
+		if(this.db != null)
+			return;
+
+		var req = indexedDB.open(this.dbName);
+
+		req.onversionchange = e => {
+			if(this.db != null) {
+				this.db.close();
+				this.db = null;
+			}
+		}
+
+		var upgradePromise = null;
+		req.onupgradeneeded = e => {
+			var db = e.target.result;
+			var keyField = this.fields[this.key];
+			if(keyField == null)
+				throw new Error('key field not found in fields');
+			var objectStore = db.createObjectStore(this.tableName, {
+				keyPath: this.key,
+				autoIncrement: !!(keyField & Store.fieldTypes.autoIncrement)
+			});
+			for(let fieldName in this.fields) {
+				var field = this.fields[fieldName];
+				objectStore.createIndex(fieldName, fieldName, {
+					unique: !!(field & Store.fieldTypes.unique),
+				});
+			}
+			upgradePromise = this.r2p(objectStore.transaction);
+		};
+
+		var db = await this.r2p(req);
+
+		db.onclose = e => {
+			this.db = null;
+		};
+
+		if(upgradePromise != null)
+			await upgradePromise;
+		this.db = db;
+	}
+
+	async byKey(key) {
+		return await this.exec('readonly', async store => {
+			var result = await this.r2p(store.get(key));
+			return result.result;
+		})
+	}
+
+	async fetch() {
+		return await this.exec('readonly', store => this.r2p(store.getAll()));
+	}
+
+	async byFieldValue(fieldName, value) {
+		await this.exec(store => {
+			var index = store.index(fieldName);
+			var range = IDBKeyRange.only(value);
+			var request = index.openCursor(range);
+			return this.unrollCursor(request);
+		});
+	}
+
+	async set(items) {
+		if(items == null)
+			throw new Error('items is null');
+	}
+
+	async insert(item) {
+		if(item == null)
+			throw new Error('item is null');
+		item = this.clone(item);
+		this.removeBag(item);
+		this.assertValid(item);
+
+		await this.exec('readwrite', async store => {
+			item[this.key] = await this.r2p(store.add(item));
+		});
+		return item;
+	}
+
+	async update(item) {
+		if(item == null)
+			throw new Error('item is null');
+		item = this.clone(item);
+		this.removeBag(item);
+		this.assertValid(item);
+
+		await this.exec('readwrite', store => this.r2p(store.put(item)));
+		return item;
+	}
+
+	async remove(key) {
+		await this.exec('readwrite', store => this.r2p(store.delete(key)));
+	}
+
+	async nextKey() {
+		if(this._nextKey === null) {
+			var items = await this.fetch();
+			this._nextKey = items.reduce((r,x) => Math.max(r, x[this.key]), -1);
+		}
+		return ++this._nextKey;
+	}
+}
+
 
 class LocalStore extends Store {
 	constructor(options) {
@@ -232,4 +409,4 @@ class GkStore {
 }
 
 export default new GkStore();
-export { Store };
+export { Store, IndexedDbStore };

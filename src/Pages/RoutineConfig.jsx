@@ -53,6 +53,7 @@ export default class extends React.Component {
 		var item = await store.makeNew(this.routineKey)
 		item.exerciseKey = exercise.key;
 		item.index = list.length;
+		item.mode = 'count';
 		item._bag = { item: exercise };
 		return item;
 	}
